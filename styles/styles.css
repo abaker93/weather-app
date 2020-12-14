@@ -73,6 +73,39 @@ body {
   position: absolute;
   z-index: -100;
 }
+#container form {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+#container form input {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 400;
+  font-size: 15px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  line-height: 1.4;
+  color: #FFFFFF;
+  margin: 0;
+  padding: 7px 15px;
+  background-color: transparent;
+  border: 1px solid #FFFFFF;
+  border-radius: 30px;
+}
+#container form button {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 400;
+  font-size: 15px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  line-height: 1.4;
+  color: #333333;
+  margin: 0;
+  padding: 7px 15px;
+  background-color: #FFFFFF;
+  border: 1px solid #FFFFFF;
+  border-radius: 30px;
+}
 #container #info {
   padding: 100px;
   max-width: 600px;

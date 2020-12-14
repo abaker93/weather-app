@@ -95,3 +95,8 @@ async function getWeather(location) {
 }
 
 getWeather('erie');
+
+const searchCity = () => {
+    const searchBar = document.getElementById('search');
+    
+}
