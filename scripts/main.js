@@ -10,10 +10,16 @@ async function getWeather(location) {
     const response = await fetch('https://api.openweathermap.org/data/2.5/weather?q=' + location + '&appid=4f5324396d378315d2b0a7feb08916cc', {mode: 'cors'});
     const weatherData = await response.json();
 
+    const d = new Date();
+    const utc = d.getTime() + (d.getTimezoneOffset() * 60000);
+
     const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-    const weatherDate = new Date(weatherData.dt * 1000);
-    const weatherHour = weatherDate.getHours();
-    const weatherMinute = weatherDate.getMinutes();
+    const weatherDate = new Date(utc + (1000 * weatherData.timezone));
+    let weatherHour = weatherDate.getHours();
+    if (weatherHour > 12) { weatherHour = weatherHour - 12 }
+    if (weatherHour < 10) { weatherHour = '0' + weatherHour }
+    let weatherMinute = weatherDate.getMinutes();
+    if (weatherMinute < 10) { weatherMinute = '0' + weatherMinute }
     const weatherMonth = monthNames[weatherDate.getMonth()];
     const weatherDay = weatherDate.getDate();
     time.innerHTML = weatherHour + ':' + weatherMinute;
@@ -21,29 +27,21 @@ async function getWeather(location) {
 
     let timeColor;
 
-    if (weatherHour >= 0 && weatherHour < 3) {
-        console.log(weatherHour + ' #30153D')
+    if (weatherDate.getHours() >= 0 && weatherDate.getHours() < 3) {
         timeColor = '#30153D'
-    } else if (weatherHour >= 3 && weatherHour < 6) {
-        console.log(weatherHour + ' #0E1844')
+    } else if (weatherDate.getHours() >= 3 && weatherDate.getHours() < 6) {
         timeColor = '#0E1844'
-    } else if (weatherHour >= 6 && weatherHour < 9) {
-        console.log(weatherHour + ' #67AFC9')
+    } else if (weatherDate.getHours() >= 6 && weatherDate.getHours() < 9) {
         timeColor = '#67AFC9'
-    } else if (weatherHour >= 9 && weatherHour < 12) {
-        console.log(weatherHour + ' #94D6DC')
+    } else if (weatherDate.getHours() >= 9 && weatherDate.getHours() < 12) {
         timeColor = '#94D6DC'
-    } else if (weatherHour >= 12 && weatherHour < 15) {
-        console.log(weatherHour + ' #FBDC76')
+    } else if (weatherDate.getHours() >= 12 && weatherDate.getHours() < 15) {
         timeColor = '#FBDC76'
-    } else if (weatherHour >= 15 && weatherHour < 18) {
-        console.log(weatherHour + ' #F99729')
+    } else if (weatherDate.getHours() >= 15 && weatherDate.getHours() < 18) {
         timeColor = '#F99729'
-    } else if (weatherHour >= 18 && weatherHour < 21) {
-        console.log(weatherHour + ' #BB4E2B')
+    } else if (weatherDate.getHours() >= 18 && weatherDate.getHours() < 21) {
         timeColor = '#BB4E2B'
-    } else if (weatherHour >= 21 && weatherHour < 24) {
-        console.log(weatherHour + ' #7C052D')
+    } else if (weatherDate.getHours() >= 21 && weatherDate.getHours() < 24) {
         timeColor = '#7C052D'
     }
 
@@ -58,35 +56,45 @@ async function getWeather(location) {
     let tempColor;
 
     if (weatherTemp < 240) {
-        console.log(weatherTemp + ' ' + weatherTempFahrenheit + ' #06B5E5')
+        tempColor = '#1D0D55'
+    } else if (weatherTemp >= 240 && weatherTemp < 245) {
+        tempColor = '#1B2267'
+    } else if (weatherTemp >= 245 && weatherTemp < 250) {
+        tempColor = '#183779'
+    } else if (weatherTemp >= 250 && weatherTemp < 255) {
+        tempColor = '#12619D'
+    } else if (weatherTemp >= 255 && weatherTemp < 260) {
+        tempColor = '#0C8BC1'
+    } else if (weatherTemp >= 260 && weatherTemp < 265) {
         tempColor = '#06B5E5'
-    } else if (weatherTemp >= 240 && weatherTemp < 250) {
-        console.log(weatherTemp + ' ' + weatherTempFahrenheit + ' #45C8EC')
+    } else if (weatherTemp >= 265 && weatherTemp < 270) {
         tempColor = '#45C8EC'
-    } else if (weatherTemp >= 250 && weatherTemp < 260) {
-        console.log(weatherTemp + ' ' + weatherTempFahrenheit + ' #83DAF2')
+    } else if (weatherTemp >= 270 && weatherTemp < 275) {
         tempColor = '#83DAF2'
-    } else if (weatherTemp >= 260 && weatherTemp < 270) {
-        console.log(weatherTemp + ' ' + weatherTempFahrenheit + ' #C1EDF9')
+    } else if (weatherTemp >= 275 && weatherTemp < 280) {
         tempColor = '#C1EDF9'
-    } else if (weatherTemp >= 270 && weatherTemp < 280) {
-        console.log(weatherTemp + ' ' + weatherTempFahrenheit + ' #E0F6FC')
+    } else if (weatherTemp >= 280 && weatherTemp < 285) {
         tempColor = '#E0F6FC'
-    } else if (weatherTemp >= 280 && weatherTemp < 290) {
-        console.log(weatherTemp + ' ' + weatherTempFahrenheit + ' #FFF4D0')
+    } else if (weatherTemp >= 285 && weatherTemp < 290) {
         tempColor = '#FFF4D0'
     } else if (weatherTemp >= 290 && weatherTemp < 300) {
-        console.log(weatherTemp + ' ' + weatherTempFahrenheit + ' #FFE8A1')
         tempColor = '#FFE8A1'
-    } else if (weatherTemp >= 300 && weatherTemp < 310) {
-        console.log(weatherTemp + ' ' + weatherTempFahrenheit + ' #FFD042')
+    } else if (weatherTemp >= 300 && weatherTemp < 305) {
         tempColor = '#FFD042'
-    } else if (weatherTemp >= 310 && weatherTemp < 320) {
-        console.log(weatherTemp + ' ' + weatherTempFahrenheit + ' #F4A13A')
+    } else if (weatherTemp >= 305 && weatherTemp < 310) {
         tempColor = '#F4A13A'
-    } else if (weatherTemp >= 320 && weatherTemp < 330) {
-        console.log(weatherTemp + ' ' + weatherTempFahrenheit + ' #E87131')
+    } else if (weatherTemp >= 310 && weatherTemp < 315) {
         tempColor = '#E87131'
+    } else if (weatherTemp >= 315 && weatherTemp < 320) {
+        tempColor = '#D45532'
+    } else if (weatherTemp >= 320 && weatherTemp < 325) {
+        tempColor = '#BF3932'
+    } else if (weatherTemp >= 325 && weatherTemp < 330) {
+        tempColor = '#AB1D32'
+    } else if (weatherTemp >= 330 && weatherTemp < 335) {
+        tempColor = '#A10F32'
+    } else if (weatherTemp > 340) {
+        tempColor = '#960032'
     }
 
     loc.innerHTML = weatherData.name;
@@ -97,6 +105,10 @@ async function getWeather(location) {
 getWeather('erie');
 
 const searchCity = () => {
-    const searchBar = document.getElementById('search');
+    const search = document.getElementById('search')
+    const newCity = search.value;
+
+    getWeather(newCity);
     
+    search.value = '';
 }
