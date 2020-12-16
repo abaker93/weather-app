@@ -16,6 +16,7 @@ async function getWeather(location) {
     const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
     const weatherDate = new Date(utc + (1000 * weatherData.timezone));
     let weatherHour = weatherDate.getHours();
+    if (weatherHour == 0) { weatherHour = 12 }
     if (weatherHour > 12) { weatherHour = weatherHour - 12 }
     if (weatherHour < 10) { weatherHour = '0' + weatherHour }
     let weatherMinute = weatherDate.getMinutes();
