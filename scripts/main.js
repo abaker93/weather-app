@@ -103,7 +103,7 @@ async function getWeather(location) {
     background.style.background = `linear-gradient(${timeColor} 0%, ${tempColor} 100%)`
 }
 
-getWeather('erie');
+getWeather('london');
 
 const searchCity = () => {
     const search = document.getElementById('search')
