@@ -6,6 +6,9 @@ const loc = document.getElementById('loc');
 
 const background = document.getElementById('background');
 
+let temperature = 0;
+let tempType = 'F';
+
 async function getWeather(location) {
     const response = await fetch('https://api.openweathermap.org/data/2.5/weather?q=' + location + '&appid=4f5324396d378315d2b0a7feb08916cc', {mode: 'cors'});
     const weatherData = await response.json();
@@ -50,9 +53,13 @@ async function getWeather(location) {
     desc.innerHTML = weatherDesc;
 
     const weatherTemp = weatherData.main.temp;
-    const weatherTempCelcius = Math.round(weatherTemp - 273.15)
-    const weatherTempFahrenheit = Math.round((weatherTemp - 273.15) * (9 / 5) + 32)
-    temp.innerHTML = weatherTempFahrenheit + ' &deg;F';
+    temperature = weatherTemp;
+
+    if (tempType == 'F') {
+        temp.innerHTML = Math.round((temperature - 273.15) * (9 / 5) + 32) + ' &deg;F';
+    } else if (tempType == 'C') {
+        temp.innerHTML = Math.round(weatherTemp - 273.15) + ' &deg;C';
+    }
 
     let tempColor;
 
@@ -112,4 +119,21 @@ const searchCity = () => {
     getWeather(newCity);
     
     search.value = '';
+}
+
+const switchTemp = type => {
+    tempType = type
+
+    const F = document.getElementById('F');
+    const C = document.getElementById('C');
+
+    if (tempType == 'F') {
+        temp.innerHTML = Math.round((temperature - 273.15) * (9 / 5) + 32) + ' &deg;F';
+        F.classList.remove('disabled')
+        C.classList.add('disabled')
+    } else if (tempType == 'C') {
+        temp.innerHTML = Math.round(temperature - 273.15) + ' &deg;C';
+        C.classList.remove('disabled')
+        F.classList.add('disabled')
+    }
 }

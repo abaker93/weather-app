@@ -120,5 +120,17 @@ body {
 #container #info #loc {
   margin-top: 100px;
 }
+#container #info #F, #container #info #C {
+  display: inline-block;
+  cursor: pointer;
+}
+#container #info #F.disabled, #container #info #C.disabled {
+  color: rgba(255, 255, 255, 0.5);
+}
+#container #info #F {
+  border-right: 1px solid #FFFFFF;
+  padding-right: 15px;
+  margin-right: 10px;
+}
 
 /*# sourceMappingURL=styles.css.map */

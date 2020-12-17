@@ -97,6 +97,21 @@ body {
         #loc {
             margin-top: 100px;
         }
+
+        #F, #C {
+            display: inline-block;
+            cursor: pointer;
+
+            &.disabled { color: rgba(255, 255, 255, 0.5); }
+
+        }
+
+        #F {
+            border-right: 1px solid #FFFFFF;
+            padding-right: 15px;
+            margin-right: 10px;
+        }
+
     }
 
 }
